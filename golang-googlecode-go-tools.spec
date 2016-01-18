@@ -1,6 +1,6 @@
 Name     : golang-googlecode-go-tools 
 Version  : 0
-Release  : 2
+Release  : 3
 URL      : https://github.com/golang/tools/archive/6b41c776c8733a36ba4586aa0bfaf5b6878c41d8.tar.gz
 Source0  : https://github.com/golang/tools/archive/6b41c776c8733a36ba4586aa0bfaf5b6878c41d8.tar.gz
 Summary  : No detailed summary available
