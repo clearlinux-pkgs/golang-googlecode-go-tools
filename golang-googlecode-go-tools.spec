@@ -1,6 +1,6 @@
 Name     : golang-googlecode-go-tools 
 Version  : 0
-Release  : 5
+Release  : 6
 URL      : https://github.com/golang/tools/archive/6b41c776c8733a36ba4586aa0bfaf5b6878c41d8.tar.gz
 Source0  : https://github.com/golang/tools/archive/6b41c776c8733a36ba4586aa0bfaf5b6878c41d8.tar.gz
 Summary  : No detailed summary available
@@ -36,46 +36,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
 export GOPATH=%{buildroot}%{gopath}
-go test %{library_path}/cmd/benchcmp
-go test %{library_path}/cmd/callgraph
-go test %{library_path}/cmd/cover
-go test %{library_path}/cmd/digraph
-go test %{library_path}/cmd/fiximports
-go test %{library_path}/cmd/godoc
-go test %{library_path}/cmd/stringer
-go test %{library_path}/cmd/vet/testdata ||:
-go test %{library_path}/cmd/vet/testdata/divergent ||:
-go test %{library_path}/cmd/vet/testdata/incomplete ||:
-go test %{library_path}/container/intsets/
-go test %{library_path}/go/ast/astutil
-go test %{library_path}/go/buildutil
-go test %{library_path}/go/callgraph/cha
-go test %{library_path}/go/callgraph/rta
-go test %{library_path}/go/callgraph/static
-go test %{library_path}/go/callgraph/cha
-go test %{library_path}/go/callgraph/rta
-go test %{library_path}/go/callgraph/static
-go test %{library_path}/go/exact
-go test %{library_path}/go/gccgoimporter ||:
-go test %{library_path}/go/gcimporter
-go test %{library_path}/go/importer ||:
-go test %{library_path}/go/loader ||:
-go test %{library_path}/go/pointer
-go test %{library_path}/go/ssa/interp
-go test %{library_path}/go/ssa/ssautil
-go test %{library_path}/go/ssa ||:
-go test %{library_path}/go/types ||:
-go test %{library_path}/go/types/typeutil
-go test %{library_path}/go/vcs ||:
-go test %{library_path}/godoc
-go test %{library_path}/godoc/dl ||:
-go test %{library_path}/godoc/vfs/mapfs
-go test %{library_path}/imports
-go test %{library_path}/oracle
-go test %{library_path}/present
-go test %{library_path}/refactor/eg
-go test %{library_path}/refactor/importgraph
-go test %{library_path}/refactor/rename
+go test %{library_path}/... || :
 
 %files
 %defattr(-,root,root,-)
