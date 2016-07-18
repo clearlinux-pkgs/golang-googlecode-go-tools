@@ -1,5 +1,5 @@
 PKG_NAME := golang-googlecode-go-tools
-URL := https://github.com/golang/tools/archive/6b41c776c8733a36ba4586aa0bfaf5b6878c41d8.tar.gz
+URL := https://github.com/golang/tools/archive/f2932db7c0155d2ea19373270a3fa937349ac375.tar.gz
 ARCHIVES :=
 
 include ../common/Makefile.common
