@@ -13,15 +13,78 @@ BuildRequires : golang-googlecode-go-net
 This subrepository holds the source for various packages and tools that support
 the Go programming language.
 
+%package bin
+Summary: bin components for the golang-googlecode-go-tools package.
+Group: Binaries
+
+%description bin
+bin components for the golang-googlecode-go-tools package.
+
 %prep
 %setup -q -n tools-f2932db7c0155d2ea19373270a3fa937349ac375
 
 %build
+mkdir -p build-dir/src/golang.org/x
+ln -s $(pwd) build-dir/src/golang.org/x/tools
+export GOPATH=$(pwd)/build-dir:/usr/lib/golang
+pushd build-dir
+for cmd in \
+    benchcmp \
+    bundle \
+    callgraph \
+    cover \
+    digraph \
+    eg \
+    fiximports \
+    godex \
+    godoc \
+    goimports \
+    gomvpkg \
+    gorename \
+    gotype \
+    guru \
+    html2article \
+    oracle \
+    present \
+    ssadump \
+    stress \
+    stringer \
+    tip
+
+do
+    go build golang.org/x/tools/cmd/$cmd
+done
+popd
+
 
 %install
+rm -rf %{buildroot}
 %global gopath /usr/lib/golang
 %global library_path golang.org/x/tools
-rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/bin 
+
+install -p -m 755 build-dir/benchcmp %{buildroot}/usr/bin
+install -p -m 755 build-dir/bundle %{buildroot}/usr/bin
+install -p -m 755 build-dir/callgraph %{buildroot}/usr/bin
+install -p -m 755 build-dir/cover %{buildroot}/usr/bin
+install -p -m 755 build-dir/digraph %{buildroot}/usr/bin
+install -p -m 755 build-dir/eg %{buildroot}/usr/bin
+install -p -m 755 build-dir/fiximports %{buildroot}/usr/bin
+install -p -m 755 build-dir/godex %{buildroot}/usr/bin
+install -p -m 755 build-dir/godoc %{buildroot}/usr/bin
+install -p -m 755 build-dir/goimports %{buildroot}/usr/bin
+install -p -m 755 build-dir/gomvpkg %{buildroot}/usr/bin
+install -p -m 755 build-dir/gorename %{buildroot}/usr/bin
+install -p -m 755 build-dir/gotype %{buildroot}/usr/bin
+install -p -m 755 build-dir/guru %{buildroot}/usr/bin
+install -p -m 755 build-dir/html2article %{buildroot}/usr/bin
+install -p -m 755 build-dir/oracle %{buildroot}/usr/bin
+install -p -m 755 build-dir/present %{buildroot}/usr/bin
+install -p -m 755 build-dir/ssadump %{buildroot}/usr/bin
+install -p -m 755 build-dir/stress %{buildroot}/usr/bin
+install -p -m 755 build-dir/stringer %{buildroot}/usr/bin
+install -p -m 755 build-dir/tip %{buildroot}/usr/bin
+
 # Copy all *.go and *.s files
 install -d -p %{buildroot}%{gopath}/src/%{library_path}/
 for ext in go s src golden template; do
@@ -37,6 +100,30 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost
 export GOPATH=%{buildroot}%{gopath}
 go test %{library_path}/... || :
+
+%files bin
+%defattr(-,root,root,-)
+/usr/bin/benchcmp
+/usr/bin/bundle
+/usr/bin/callgraph
+/usr/bin/cover
+/usr/bin/digraph
+/usr/bin/eg
+/usr/bin/fiximports
+/usr/bin/godex
+/usr/bin/godoc
+/usr/bin/goimports
+/usr/bin/gomvpkg
+/usr/bin/gorename
+/usr/bin/gotype
+/usr/bin/guru
+/usr/bin/html2article
+/usr/bin/oracle
+/usr/bin/present
+/usr/bin/ssadump
+/usr/bin/stress
+/usr/bin/stringer
+/usr/bin/tip
 
 %files
 %defattr(-,root,root,-)
