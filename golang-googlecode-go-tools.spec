@@ -9,6 +9,8 @@ License  : BSD-3-Clause
 BuildRequires : go
 BuildRequires : golang-googlecode-go-net
 
+Requires: golang-googlecode-go-tools-bin
+
 %description
 This subrepository holds the source for various packages and tools that support
 the Go programming language.
