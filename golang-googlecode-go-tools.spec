@@ -105,8 +105,9 @@ go test %{library_path}/... || :
 
 %files bin
 %defattr(-,root,root,-)
+# Exclude bundle due a conflict with rubygem-bundler
+%exclude /usr/bin/bundle
 /usr/bin/benchcmp
-/usr/bin/bundle
 /usr/bin/callgraph
 /usr/bin/cover
 /usr/bin/digraph
